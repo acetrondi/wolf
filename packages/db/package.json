@@ -1,0 +1,16 @@
+{
+  "name": "@wolf/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts"
+  },
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "@wolf/config": "*",
+    "drizzle-orm": "^1.0.0-rc.4"
+  }
+}

@@ -5,6 +5,10 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "verbatimModuleSyntax": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -19,7 +23,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@wolf/config": ["./packages/config/src/index.ts"],
+      "@wolf/config/*": ["./packages/config/src/*"],
+      "@wolf/db": ["./packages/db/src/index.ts"],
+      "@wolf/db/*": ["./packages/db/src/*"],
+      "@wolf/contracts": ["./packages/contracts/src/index.ts"],
+      "@wolf/core": ["./packages/core/src/index.ts"]
     }
   },
   "include": [
@@ -30,5 +40,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "drizzle"]
 }
