@@ -39,18 +39,20 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: production
-      APP_URL: http://localhost:3000
-      DATABASE_URL: postgresql://ci:ci@localhost:5432/wolf
-      CLERK_SECRET_KEY: sk_test_ci
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_ci
-      OPENROUTER_API_KEY: sk-or-v1-ci
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: npm
+      # Do not set NODE_ENV=production before npm ci — that skips devDependencies
+      # (Tailwind/PostCSS) and breaks next build.
       - run: npm ci
       - run: npm run build
+        env:
+          NODE_ENV: production
+          APP_URL: http://localhost:3000
+          DATABASE_URL: postgresql://ci:ci@localhost:5432/wolf
+          CLERK_SECRET_KEY: sk_test_ci
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_ci
+          OPENROUTER_API_KEY: sk-or-v1-ci
