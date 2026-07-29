@@ -1,4 +1,4 @@
-import { withTenant } from "@wolf/db";
+﻿import { withTenant } from "@wolf/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -47,6 +47,9 @@ export default async function BrandPage({ params }: PageProps) {
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold">{data.brand.name}</h1>
         <p className="text-muted-foreground">Voice not set up yet.</p>
+        <Link className="underline" href={`/app/brands/${brandId}/platforms`}>
+          Set platform preferences
+        </Link>
         <Link className="underline" href={`/app/brands/${brandId}/voice/onboarding`}>
           Set up voice
         </Link>
@@ -59,10 +62,13 @@ export default async function BrandPage({ params }: PageProps) {
       <div>
         <h1 className="text-2xl font-semibold">{data.brand.name}</h1>
         <p className="text-sm text-muted-foreground">
-          Voice v{data.voice.version} · {data.voice.confidence ?? "unknown"} confidence ·{" "}
-          <span className="font-mono">{data.voice.cardHash.slice(0, 12)}…</span>
+          Voice v{data.voice.version} Â· {data.voice.confidence ?? "unknown"} confidence
+          Â· <span className="font-mono">{data.voice.cardHash.slice(0, 12)}â€¦</span>
         </p>
       </div>
+      <Link className="text-sm underline" href={`/app/brands/${brandId}/platforms`}>
+        Set platform preferences
+      </Link>
       <pre className="overflow-auto rounded-xl border border-border bg-muted p-4 text-xs whitespace-pre-wrap">
         {data.voice.compiledCard}
       </pre>

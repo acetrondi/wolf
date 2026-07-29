@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+﻿import { sql } from "drizzle-orm";
 import {
   boolean,
   index,
@@ -108,6 +108,7 @@ export const brandPlatformProfile = pgTable(
     handle: text("handle"),
     targetContext: jsonb("target_context").notNull().default({}),
     cadence: jsonb("cadence").notNull().default({}),
+    contentGuidance: jsonb("content_guidance").notNull().default({}),
     voiceOverrides: jsonb("voice_overrides").notNull().default({}),
     isEnabled: boolean("is_enabled").notNull().default(true),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),

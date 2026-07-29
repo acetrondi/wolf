@@ -3,7 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 import { findUserWithMemberships, withSystem } from "@wolf/db";
 import { redirect } from "next/navigation";
 
+import { AppSidebar } from "@/components/app-sidebar";
 import { OrgSwitcher } from "@/components/org-switcher";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { getActiveBrandSelection } from "@/lib/brands/active-brand";
 import { resolveTenantContext } from "@/lib/tenant/resolve-tenant-context";
 
 export default async function AppShellLayout({
@@ -12,30 +15,36 @@ export default async function AppShellLayout({
   children: React.ReactNode;
 }) {
   const ctx = await resolveTenantContext();
-  if (!ctx.ok) {
-    redirect("/auth/sign-in");
-  }
-
+  if (!ctx.ok) redirect("/auth/sign-in");
   const { userId: externalId } = await auth();
   const userRow = externalId
     ? await withSystem("app shell memberships", (tx) =>
         findUserWithMemberships(tx, externalId),
       )
     : null;
+  const { brands, activeBrand } = await getActiveBrandSelection(ctx.value);
 
   return (
-    <div className="flex min-h-svh flex-col bg-background">
-      <header className="flex items-center justify-between border-b border-border px-6 py-4">
-        <div className="flex items-center gap-6">
-          <span className="text-sm font-semibold tracking-tight">Wolf</span>
+    <SidebarProvider
+      style={
+        { "--sidebar-width": "18rem", "--header-height": "4rem" } as React.CSSProperties
+      }
+    >
+      <AppSidebar
+        variant="inset"
+        brands={brands}
+        activeBrandId={activeBrand?.id ?? null}
+      />
+      <SidebarInset>
+        <header className="flex h-(--header-height) items-center justify-between border-b bg-background px-4 lg:px-6">
           <OrgSwitcher
             memberships={userRow?.memberships ?? []}
             activeOrgId={ctx.value.orgId}
           />
-        </div>
-        <UserButton />
-      </header>
-      <main className="flex-1 px-6 py-8">{children}</main>
-    </div>
+          <UserButton />
+        </header>
+        <main className="flex-1 p-4 lg:p-6">{children}</main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

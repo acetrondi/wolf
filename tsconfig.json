@@ -17,11 +17,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
       "@wolf/config": ["./packages/config/src/index.ts"],
@@ -30,7 +26,8 @@
       "@wolf/db/*": ["./packages/db/src/*"],
       "@wolf/contracts": ["./packages/contracts/src/index.ts"],
       "@wolf/core": ["./packages/core/src/index.ts"],
-      "@wolf/voice": ["./packages/voice/src/index.ts"]
+      "@wolf/voice": ["./packages/voice/src/index.ts"],
+      "@wolf/platforms": ["./packages/platforms/src/index.ts"]
     }
   },
   "include": [

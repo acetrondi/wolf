@@ -1,0 +1,15 @@
+{
+  "name": "@wolf/platforms",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@wolf/contracts": "*",
+    "@wolf/voice": "*",
+    "zod": "^4.4.3"
+  }
+}
