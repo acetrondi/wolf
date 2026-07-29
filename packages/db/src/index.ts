@@ -1,5 +1,5 @@
-import { env } from "@wolf/config";
-import { drizzle } from "drizzle-orm/neon-http";
+export { schema } from "./schema";
+export { closeDbClients, withSystem, withTenant } from "./tenant";
+export type { TenantCtx, Tx } from "./types";
 
-export const db = drizzle(env.DATABASE_URL);
-export * from "./schema";
+// Intentionally NOT exporting raw pool helpers (D-18).

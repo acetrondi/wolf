@@ -5,12 +5,12 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./schema": "./src/schema.ts"
+    "./schema": "./src/schema/index.ts"
   },
   "types": "./src/index.ts",
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
     "@wolf/config": "*",
-    "drizzle-orm": "^1.0.0-rc.4"
+    "drizzle-orm": "^1.0.0-rc.4",
+    "postgres": "^3.4.9"
   }
 }

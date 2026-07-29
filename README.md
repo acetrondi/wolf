@@ -2,7 +2,7 @@
 
 > A brand-voice-aware content operating system that turns one strategic input into a scheduled week of platform-native content, with version history and calendar sync.
 
-**Status:** early foundation (Phase 0). Auth, Neon Postgres, and Drizzle are wired; the product surface is still being built.
+**Status:** Phase 0–1 foundation. Auth, Neon Postgres, RLS tenant gate, and seeds are wired; product UI comes next.
 
 Repo: [github.com/acetrondi/wolf](https://github.com/acetrondi/wolf)
 
@@ -15,7 +15,7 @@ Repo: [github.com/acetrondi/wolf](https://github.com/acetrondi/wolf)
 | App | Next.js 16 (App Router) |
 | Auth | [Clerk](https://clerk.com) (email + Google SSO) |
 | Database | [Neon](https://neon.tech) Postgres |
-| ORM | [Drizzle](https://orm.drizzle.team) (`drizzle-orm` + Neon HTTP) |
+| ORM | [Drizzle](https://orm.drizzle.team) + `postgres` (transaction-capable) |
 | AI gateway | [OpenRouter](https://openrouter.ai) (default model: `google/gemini-3.6-flash`, [structured outputs](https://openrouter.ai/docs/guides/features/structured-outputs)) |
 | Lint / format | [Biome](https://biomejs.dev) |
 | Tests | Vitest |
@@ -75,17 +75,19 @@ Never commit `.env`. Only `.env.example` is tracked.
 
 ### 3. Database
 
-Push the current Drizzle schema to Neon:
+Apply migrations (roles, schema, RLS):
 
 ```bash
-npm run db:push
+npm run db:migrate
 ```
 
-Smoke-test CRUD (optional):
+Seed platforms + demo org:
 
 ```bash
 npm run db:seed
 ```
+
+Optional but recommended: set `DATABASE_URL_MIGRATOR` (or `DATABASE_URL_SESSION`) to Neon’s **direct** (non-pooler) connection string. The tenant gate uses `SET LOCAL ROLE`, which is more reliable off the transaction pooler.
 
 ### 4. Clerk
 
@@ -115,11 +117,9 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | Vitest unit tests |
 | `npm run boundaries` | dependency-cruiser (package/vendor rules) |
-| `npm run db:push` | Push schema to Neon (dev) |
-| `npm run db:generate` | Generate SQL migrations |
-| `npm run db:migrate` | Apply migrations |
+| `npm run db:migrate` | Apply SQL migrations (`packages/db/migrations`) |
+| `npm run db:seed` | Seed 11 platforms + demo org |
 | `npm run db:studio` | Drizzle Studio |
-| `npm run db:seed` | CRUD smoke script |
 
 CI runs lint → typecheck → boundaries → tests → build on PRs and pushes to `main` / `dev`.
 
@@ -132,7 +132,7 @@ wolf/
 ├── app/                      # Next.js App Router (UI + routes)
 ├── packages/
 │   ├── config/               # Zod env contract (@wolf/config)
-│   ├── db/                   # Drizzle schema + client (@wolf/db)
+│   ├── db/                   # schema, migrations, withTenant/withSystem, seed
 │   ├── contracts/            # Shared Zod DTOs (growing)
 │   └── core/                 # Use cases + port interfaces (no vendor SDKs)
 ├── components/               # UI components (shadcn)

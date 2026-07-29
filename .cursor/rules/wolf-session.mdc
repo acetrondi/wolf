@@ -1,0 +1,10 @@
+---
+description: Start every chat from steps-taken-so-far; server-first and project conventions
+alwaysApply: true
+---
+
+# Wolf session bootstrap
+
+1. At the start of a new chat, **read `docs/steps-taken-so-far.md` first** before other work.
+2. Follow `AGENTS.md` for server-first UI, naming, DRY, and folder structure.
+3. Do not reopen settled decisions (Neon-only, no Docker Postgres, Clerk, OpenRouter model) unless the user changes them.
