@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+﻿import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -34,7 +34,9 @@ async function main() {
     for (const file of files) {
       const id = file;
       const body = await readFile(path.join(MIGRATIONS_DIR, file), "utf8");
-      const checksum = createHash("sha256").update(body).digest("hex");
+      const checksum = createHash("sha256")
+        .update(body.replace(/\r\n/g, "\n"))
+        .digest("hex");
 
       const existing = await sql<
         { id: string; checksum: string }[]

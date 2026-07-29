@@ -73,6 +73,7 @@ export const brandVoiceSample = pgTable(
       .notNull()
       .references(() => brand.id, { onDelete: "cascade" }),
     label: text("label").notNull(),
+    curatorTag: text("curator_tag"),
     sourceUrl: text("source_url"),
     body: text("body").notNull(),
     notes: text("notes"),

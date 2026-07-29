@@ -10,6 +10,7 @@
   "types": "./src/index.ts",
   "dependencies": {
     "@wolf/config": "*",
+    "@wolf/contracts": "*",
     "drizzle-orm": "^1.0.0-rc.4",
     "postgres": "^3.4.9"
   }

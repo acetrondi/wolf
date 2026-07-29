@@ -29,7 +29,8 @@
       "@wolf/db": ["./packages/db/src/index.ts"],
       "@wolf/db/*": ["./packages/db/src/*"],
       "@wolf/contracts": ["./packages/contracts/src/index.ts"],
-      "@wolf/core": ["./packages/core/src/index.ts"]
+      "@wolf/core": ["./packages/core/src/index.ts"],
+      "@wolf/voice": ["./packages/voice/src/index.ts"]
     }
   },
   "include": [

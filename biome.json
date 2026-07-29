@@ -41,6 +41,21 @@
   },
   "overrides": [
     {
+      "includes": ["components/ui/**"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noLabelWithoutControl": "off",
+            "useSemanticElements": "off"
+          },
+          "suspicious": {
+            "noArrayIndexKey": "off",
+            "noDoubleEquals": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["drizzle/**", ".next/**", "node_modules/**"],
       "linter": { "enabled": false },
       "formatter": { "enabled": false }

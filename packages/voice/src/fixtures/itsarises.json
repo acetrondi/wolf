@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "positioning": {
+    "audience": "founders who ship client software and hate marketing fluff",
+    "intent": "respect",
+    "spine": "Most agencies sell certainty; the honest pitch is naming tradeoffs early."
+  },
+  "persona": {
+    "pov": "first_singular",
+    "role": "a founder who builds and ships client software, not a marketer",
+    "credibility": [
+      "8 years building fintech and e-commerce",
+      "runs a small agency",
+      "one startup that failed on bad market research"
+    ],
+    "relationship": "practitioner"
+  },
+  "axes": {
+    "formality": 2,
+    "warmth": 3,
+    "directness": 5,
+    "technical_depth": 4,
+    "humour": 2,
+    "claim_strength": 4
+  },
+  "rhythm": {
+    "avg_sentence_words": 14,
+    "sentence_variance": "high",
+    "paragraph_max_sentences": 3,
+    "opener_style": "claim",
+    "closer_style": "understatement"
+  },
+  "lexicon": {
+    "preferred": ["shipped", "in production", "measured", "the tradeoff", "actually"],
+    "banned": [
+      "leverage",
+      "seamless",
+      "delve",
+      "unlock",
+      "game-changer",
+      "robust",
+      "journey",
+      "elevate",
+      "cutting-edge",
+      "in today's fast-paced world"
+    ],
+    "spelling": "en_in",
+    "jargon_policy": "explain_on_first_use",
+    "emoji": "never",
+    "contractions": true,
+    "profanity": "never",
+    "language_mix": "en_only"
+  },
+  "boundaries": {
+    "topics": ["client names without permission", "revenue numbers"],
+    "anti_voices": ["corporate LinkedIn guru", "hype startup founder"],
+    "public_private_distance": "professional_layer"
+  },
+  "evidence": {
+    "requires_specifics": true,
+    "allowed_proof": ["metric", "personal_experience", "case_study", "screenshot"],
+    "forbidden_claims": ["guaranteed results", "#1 agency", "10x your revenue"],
+    "disclosure": null
+  },
+  "rules": {
+    "must": [
+      "Name the tradeoff of any recommendation.",
+      "If a number is used, say where it came from.",
+      "Admit what you don't know instead of hedging."
+    ],
+    "must_not": [
+      "Open with a rhetorical question.",
+      "Use a three-item abstract list as a rhetorical device.",
+      "End on a generic upbeat note.",
+      "Pitch the agency in the body of an educational post."
+    ]
+  },
+  "exemplars": { "good_sample_ids": [], "bad_sample_ids": [] }
+}

@@ -24,6 +24,22 @@ const schema = z.object({
   CLERK_SECRET_KEY: z.preprocess(emptyToUndefined, z.string().min(1)),
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.preprocess(emptyToUndefined, z.string().min(1)),
   CLERK_WEBHOOK_SECRET: optionalString,
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.preprocess(
+    emptyToUndefined,
+    z.string().default("/auth/sign-in"),
+  ),
+  NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.preprocess(
+    emptyToUndefined,
+    z.string().default("/auth/sign-up"),
+  ),
+  NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.preprocess(
+    emptyToUndefined,
+    z.string().default("/app"),
+  ),
+  NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.preprocess(
+    emptyToUndefined,
+    z.string().default("/app"),
+  ),
 
   OPENROUTER_API_KEY: z.preprocess(emptyToUndefined, z.string().min(1)),
   OPENROUTER_MODEL: z.preprocess(

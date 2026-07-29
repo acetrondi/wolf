@@ -2,7 +2,7 @@
 
 > A brand-voice-aware content operating system that turns one strategic input into a scheduled week of platform-native content, with version history and calendar sync.
 
-**Status:** Phase 0–1 foundation. Auth, Neon Postgres, RLS tenant gate, and seeds are wired; product UI comes next.
+**Status:** Phase 0–2 foundation. Auth, tenancy wiring, Neon Postgres, RLS tenant gate, and seeds are wired; product UI comes next.
 
 Repo: [github.com/acetrondi/wolf](https://github.com/acetrondi/wolf)
 
@@ -67,6 +67,9 @@ Fill **required** values in `.env`:
 | `DATABASE_URL` | Neon → Connection details → **pooled** URL (`…-pooler…`) |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk → API keys |
 | `CLERK_SECRET_KEY` | Clerk → API keys |
+| `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | `/auth/sign-in` (default in `.env.example`) |
+| `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | `/auth/sign-up` |
+| `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` | `/app` |
 | `OPENROUTER_API_KEY` | OpenRouter → Keys |
 
 Optional keys (email, S3, Calendar, encryption, webhook secret) can stay empty until those features land. The app validates env at boot via `@wolf/config` and fails fast if a required var is missing or invalid.
@@ -93,7 +96,8 @@ Optional but recommended: set `DATABASE_URL_MIGRATOR` (or `DATABASE_URL_SESSION`
 
 1. In the Clerk Dashboard, set allowed origins / redirect URLs for `http://localhost:3000`.
 2. Enable **Google** under SSO connections (development instances can use Clerk’s shared Google credentials).
-3. Sign-in / sign-up routes live at `/sign-in` and `/sign-up`.
+3. Auth routes: `/auth/sign-in`, `/auth/sign-up` (protected app lives under `/app`).
+4. Optional webhooks: point Clerk to `POST /api/webhooks/clerk` and set `CLERK_WEBHOOK_SECRET` to the signing secret. Signup also self-heals on first app request if the webhook is late.
 
 ### 5. Run the app
 
